@@ -3,8 +3,8 @@ set -eu
 
 BASE=/volume1/homes/admin/wireguard
 
-WG="$BASE/wg"
-WG_GO="$BASE/wireguard-go"
+WG="$BASE/synology/dist/linux-armv7/wg"
+WG_GO="$BASE/synology/dist/linux-armv7/wireguard-go"
 CONF="$BASE/wg.conf"
 
 IFACE=wg-vault
