@@ -193,8 +193,8 @@ scp synology/dist/linux-armv7/wg \
     synology/dist/linux-armv7/wireguard-go \
     david@nas.vanves:/volume1/services/wireguard/bin/
 
-scp synology/start.sh \
-    david@nas.vanves:/volume1/services/wireguard/scripts/start.sh
+scp synology/wg-start.sh \
+    david@nas.vanves:/volume1/services/wireguard/scripts/wg-start.sh
 ```
 
 Si le compte SSH n'a pas les droits d'écriture, copier d'abord dans son répertoire personnel puis déplacer les fichiers en tant que root.
@@ -204,7 +204,7 @@ Sur le NAS :
 ```sh
 chmod 755 /volume1/services/wireguard/bin/wg
 chmod 755 /volume1/services/wireguard/bin/wireguard-go
-chmod 755 /volume1/services/wireguard/scripts/start.sh
+chmod 755 /volume1/services/wireguard/scripts/wg-start.sh
 
 /volume1/services/wireguard/bin/wg --version
 /volume1/services/wireguard/bin/wireguard-go --version
@@ -226,7 +226,7 @@ Transmettre **uniquement la clé publique** au Beryl. Ne jamais versionner `priv
 
 ## 7. Configuration des NAS
 
-Le script `synology/start.sh` charge :
+Le script `synology/wg-start.sh` charge :
 
 ```text
 /volume1/services/wireguard/config/network.env
@@ -313,7 +313,7 @@ Vérifier que le pare-feu Beryl autorise le transfert entre pairs WireGuard lors
 
 ## 8. Démarrage
 
-Le script actuellement présent dans `synology/start.sh` :
+Le script actuellement présent dans `synology/wg-start.sh` :
 
 1. Charge `network.env`.
 2. Démarre `wireguard-go` si l'interface `wg-vault` n'existe pas.
@@ -324,7 +324,7 @@ Le script actuellement présent dans `synology/start.sh` :
 Lancer en root :
 
 ```sh
-/volume1/services/wireguard/scripts/start.sh
+/volume1/services/wireguard/scripts/wg-start.sh
 ```
 
 Le script utilise :
@@ -381,7 +381,7 @@ Dans **Panneau de configuration → Planificateur de tâches** :
 4. Indiquer :
 
 ```sh
-/volume1/services/wireguard/scripts/start.sh
+/volume1/services/wireguard/scripts/wg-start.sh
 ```
 
 Le volume `/volume1` et le réseau doivent être disponibles avant l'exécution. Prévoir une temporisation ou une logique de retry si nécessaire.
@@ -488,7 +488,7 @@ Vérifier que la route par défaut pointe toujours vers le routeur LAN.
 | Exécution de `wg` sur Synology | Validée |
 | Support TUN Synology | Validé |
 | Makefile et `synology.mk` | Présents |
-| `synology/start.sh` | Présent, à tester en conditions réelles |
+| `synology/wg-start.sh` | Présent, à tester en conditions réelles |
 | Pair NAS Vanves sur Beryl | À configurer |
 | Pair NAS PDC sur Beryl | À configurer |
 | Démarrage automatique DSM | À configurer |

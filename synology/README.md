@@ -78,7 +78,7 @@ wireguard/
 |---|---|
 | `Makefile` | Main build entry point |
 | `synology/synology.mk` | Synology-specific build targets |
-| `synology/start.sh` | WireGuard startup script |
+| `synology/wg-start.sh` | WireGuard startup script |
 | `synology/dist/linux-armv7/wg` | Compiled ARMv7 configuration utility |
 | `synology/dist/linux-armv7/wireguard-go` | Compiled ARMv7 userspace daemon |
 | `wireguard-go/` | Upstream WireGuard Go source |
@@ -232,10 +232,10 @@ chmod 755 /volume1/services/wireguard/bin/wireguard-go
 /volume1/services/wireguard/bin/wireguard-go --version
 ```
 
-Copy `synology/start.sh` to `/volume1/services/wireguard/scripts/start.sh` and make it executable:
+Copy `synology/wg-start.sh` to `/volume1/services/wireguard/scripts/wg-start.sh` and make it executable:
 
 ```sh
-chmod 755 /volume1/services/wireguard/scripts/start.sh
+chmod 755 /volume1/services/wireguard/scripts/wg-start.sh
 ```
 
 ## 6. WireGuard keys
@@ -337,7 +337,7 @@ Do not reuse an existing peer address. Verify that the Beryl firewall permits th
 Run as root:
 
 ```sh
-/volume1/services/wireguard/scripts/start.sh
+/volume1/services/wireguard/scripts/wg-start.sh
 ```
 
 The current script:
@@ -405,7 +405,7 @@ WireGuard can be started with DSM Task Scheduler:
 5. Execute:
 
 ```sh
-/volume1/services/wireguard/scripts/start.sh
+/volume1/services/wireguard/scripts/wg-start.sh
 ```
 
 Ensure `/volume1` is mounted and networking is initialized before starting the script. Add retries where appropriate. A boot-only scheduled task does not supervise or restart `wireguard-go` if it exits unexpectedly; dedicated supervision may be added later.
